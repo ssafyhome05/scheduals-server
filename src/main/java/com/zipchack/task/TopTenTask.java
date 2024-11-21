@@ -38,6 +38,7 @@ public class TopTenTask {
       TopTenEntity prevEntity = topTenRepository.findById(timeFormatter(now.minusMinutes(5))).get();
       if (prevEntity.getElements() != null) {
         calcChanged(nowEntity, prevEntity);
+        
       }
     }
 
@@ -56,6 +57,7 @@ public class TopTenTask {
       );
     }
 
+    
     List<String> keywords = keywordScoreMap.keySet().stream()
         .sorted(Comparator.comparingInt(keywordScoreMap::get).reversed())
         .limit(10).toList();
