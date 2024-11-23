@@ -1,23 +1,15 @@
 package com.zipchack.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import com.zipchack.dto.NewsDto;
-
-
-//레거시코드입니다.
+import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(
 		name = "Zipchack",
-		url="127.0.0.1:8000",
-		configuration = {
-				FeignSnakeCaseConfig.class,
-		}
+		url="${news-crawling.url}"
 )
 public interface NewsClient {
 	
-	@GetMapping("/news")
+	@PostMapping("/addNewsList")
 	void addNewsList(); 
 	
 

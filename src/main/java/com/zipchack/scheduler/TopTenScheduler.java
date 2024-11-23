@@ -1,13 +1,11 @@
 package com.zipchack.scheduler;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.zipchack.api.NewsClient;
-import com.zipchack.dto.NewsDto;
 import com.zipchack.entity.TopTenEntity;
 import com.zipchack.task.TopTenTask;
 
@@ -20,7 +18,10 @@ public class TopTenScheduler {
   private final TopTenTask task;
   private final NewsClient newsClient;
 
-  public TopTenScheduler(TopTenTask task, NewsClient newsClient) {
+  public TopTenScheduler(
+      TopTenTask task,
+      NewsClient newsClient
+  ) {
 
     this.task = task;
     this.newsClient = newsClient;
@@ -33,10 +34,10 @@ public class TopTenScheduler {
     log.info(topTenEntity.toString());
   }
   
-  @Scheduled(cron = "0 */5 * * * *")
+  @Scheduled(cron = "0 0 */6 * * *")
   public void newsScheduler() {
     newsClient.addNewsList();
-    
+    log.info("News list added");
   }
   
   
